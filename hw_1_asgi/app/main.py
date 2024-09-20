@@ -1,6 +1,6 @@
-from errors import NotFound
+from .errors import NotFound
 from typing import Any, Callable, Awaitable
-from routes import handle_mean, handle_factorial, handle_fibonacci, send_response
+from .routes import handle_mean, handle_factorial, handle_fibonacci, send_response
 
 
 async def app(scope: dict[str, Any],

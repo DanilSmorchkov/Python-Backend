@@ -1,4 +1,4 @@
-from errors import BadRequest, UnProcessable, HTTPException
+from .errors import BadRequest, UnProcessable, HTTPException
 from typing import Any, Callable, Awaitable
 from urllib.parse import parse_qs
 import json
