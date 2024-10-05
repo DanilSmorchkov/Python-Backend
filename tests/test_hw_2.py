@@ -8,7 +8,7 @@ import pytest
 from faker import Faker
 from fastapi.testclient import TestClient
 
-from lecture_2.hw.shop_api.main import app
+from hw_2_RESTAPI.main import app
 
 client = TestClient(app)
 faker = Faker()
@@ -29,7 +29,7 @@ def existing_items() -> list[int]:
         for i in range(10)
     ]
 
-    return [client.post("/item", json=item).json()["id"] for item in items]
+    return [client.post("/item", json=item).json()['id'] for item in items]
 
 
 @pytest.fixture(scope="session", autouse=True)
