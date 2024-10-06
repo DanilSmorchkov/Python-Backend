@@ -1,5 +1,4 @@
 from http import HTTPStatus
-from http.client import UNPROCESSABLE_ENTITY
 from typing import Any
 from uuid import uuid4
 import pytest_asyncio

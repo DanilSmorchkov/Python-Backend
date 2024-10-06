@@ -11,7 +11,7 @@ class ItemResponse(BaseModel):
     id: int
     name: str
     price: float
-    deleted: bool
+    # deleted: bool # Непонятно, нужно ли выводить данное поле
 
     @staticmethod
     def from_item(model: Item) -> ItemResponse:
@@ -19,14 +19,14 @@ class ItemResponse(BaseModel):
             id=model.id,
             name=model.info.name,
             price=model.info.price,
-            deleted=model.info.deleted,
+            # deleted=model.info.deleted,
         )
 
 
 class ItemRequest(BaseModel):
     name: str
     price: Annotated[float, Field(gt=0.0)]
-    deleted: bool = False  # Нужен ли в рамках данной ДЗ, или просто всегда задавать False в методе
+    deleted: bool = False
 
     def to_item_info(self) -> ItemInfo:
         return ItemInfo(name=self.name, price=self.price, deleted=self.deleted)
