@@ -1,7 +1,7 @@
-from fastapi import APIRouter, Response, Query, HTTPException
+from fastapi import APIRouter, Response, Query, HTTPException, Path
 from http import HTTPStatus
 from pydantic import NonNegativeInt, PositiveInt
-from typing import Annotated
+from typing import Annotated, List
 
 from hw_2_RESTAPI.store import queries
 from .contracts import CartResponse
@@ -19,8 +19,9 @@ async def create_cart(response: Response):
     return CartResponse.from_cart(cart)
 
 
-@cart_router.post('/{id}/add/{item_id}')
-async def add_item_to_cart(id: int, item_id: int):
+@cart_router.post('/{id}/add/{item_id}',
+                  status_code=HTTPStatus.CREATED)
+async def add_item_to_cart(id: Annotated[int, Path()], item_id: Annotated[int, Path()]):
     response = queries.add_item_to_cart(id, item_id)
     if response is None:
         raise HTTPException(status_code=HTTPStatus.NOT_FOUND,
@@ -35,7 +36,7 @@ async def add_item_to_cart(id: int, item_id: int):
 
 
 @cart_router.get('/{id}')
-async def get_cart(id: int):
+async def get_cart(id: Annotated[int, Path()]) -> CartResponse:
     cart = queries.get_cart(id)
     if cart is None:
         raise HTTPException(status_code=HTTPStatus.NOT_FOUND,
@@ -51,7 +52,7 @@ async def get_list_carts(
         max_price: Annotated[float | None, Query(ge=0.)] = None,
         min_quantity: Annotated[NonNegativeInt | None, Query()] = None,
         max_quantity: Annotated[NonNegativeInt | None, Query()] = None,
-):
+) -> List[CartResponse]:
     return [CartResponse.from_cart(cart) for cart in queries.get_carts(
         offset=offset,
         limit=limit,

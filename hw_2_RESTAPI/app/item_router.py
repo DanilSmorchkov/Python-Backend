@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException, Query, Response
+from fastapi import APIRouter, HTTPException, Query, Response, Path
 from pydantic import NonNegativeInt, PositiveInt
 from typing import List
 
@@ -24,14 +24,14 @@ async def post_item(request: ItemRequest, response: Response) -> ItemResponse:
 @item_router.get('/{id}',
                  responses={
                      HTTPStatus.OK: {
-                         "description": "Successfully returned requested pokemon",
+                         "description": "Successfully returned requested item",
                      },
                      HTTPStatus.NOT_FOUND: {
-                         "description": "Failed to return requested pokemon as one was not found",
+                         "description": "Failed to return requested item as one was not found",
                      },
                  },
 )
-async def get_item(id: int) -> ItemResponse:
+async def get_item(id: Annotated[int, Path()]) -> ItemResponse:
     item = queries.get_item(id)
     if item is None:
         raise HTTPException(status_code=HTTPStatus.NOT_FOUND,
@@ -53,7 +53,7 @@ async def get_list_items(
 
 
 @item_router.put('/{id}')
-async def put_item(id: int, request: ItemRequest) -> ItemResponse:
+async def put_item(id: Annotated[int, Path()], request: ItemRequest) -> ItemResponse:
     item = queries.put_item(id=id, new_item=request.to_item_info())
     if item is None:
         raise HTTPException(status_code=HTTPStatus.NOT_MODIFIED,
@@ -62,7 +62,7 @@ async def put_item(id: int, request: ItemRequest) -> ItemResponse:
 
 
 @item_router.patch('/{id}')
-async def patch_item(id: int, request: PatchItemRequest) -> ItemResponse:
+async def patch_item(id: Annotated[int, Path()], request: PatchItemRequest) -> ItemResponse:
     info = queries.patch_item(id=id, new_item=request.to_item_info())
     if info is None:
         raise HTTPException(status_code=HTTPStatus.NOT_MODIFIED,
