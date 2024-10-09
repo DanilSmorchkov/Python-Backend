@@ -3,7 +3,7 @@ from __future__ import annotations
 from pydantic import BaseModel, ConfigDict, Field
 from typing import Annotated, Literal
 
-from hw_2_RESTAPI.store.models import Item, ItemInfo, CartItem, Cart
+from hw_2_RESTAPI_and_3_docker.store.models import Item, ItemInfo, CartItem, Cart
 
 
 # contracts for items
