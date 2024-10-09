@@ -3,7 +3,7 @@ from http import HTTPStatus
 from pydantic import NonNegativeInt, PositiveInt
 from typing import Annotated, List
 
-from hw_2_RESTAPI.store import queries
+from hw_2_RESTAPI_and_3_docker.store import queries
 from .contracts import CartResponse
 
 cart_router = APIRouter(prefix='/cart')

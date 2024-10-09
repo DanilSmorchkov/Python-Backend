@@ -6,7 +6,7 @@ from typing import Annotated
 from http import HTTPStatus
 
 from .contracts import ItemResponse, ItemRequest, PatchItemRequest
-from hw_2_RESTAPI.store import queries
+from hw_2_RESTAPI_and_3_docker.store import queries
 
 item_router = APIRouter(prefix="/item")
 
