@@ -70,3 +70,4 @@ websockets==13.1
     # via -r requirements.in
 httpx==0.27.0
     # via starlette
+prometheus-fastapi-instrumentator==7.0.0
