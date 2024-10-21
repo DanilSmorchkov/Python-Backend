@@ -24,9 +24,12 @@ jobs:
       - name: Install dependencies
         run: |
           pip install -r requirements.txt
-      - name: Run pytest
+      - name: Test Homework 1
         run: |
-          pytest -vv
+          pytest -vv tests/test_hw_1.py
+      - name: Test Homework 2
+        run: |
+          pytest -vv tests/test_hw_2.py
       - name: Check HW4
         run: |
           python -m pytest -vv --cov-report term-missing --cov=hw_4_tests/demo_service/ tests/hw_4/
