@@ -72,3 +72,4 @@ httpx==0.27.0
     # via starlette
 prometheus-fastapi-instrumentator==7.0.0
 pytest-cov
+locust
