@@ -32,5 +32,5 @@ jobs:
           pytest -vv tests/test_hw_2.py
       - name: Check HW4
         run: |
-          python -m pytest -vv --cov-report term-missing --cov=hw_4_tests/demo_service/ tests/hw_4/
+          pytest -vv --cov-report=term-missing --cov=hw_4_tests/demo_service/ tests/hw_4/
 
